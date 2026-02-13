@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 5 Brothers - Digital Manga</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&family=Permanent+Marker&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #ff6b35;
+            --secondary: #004e89;
+            --accent: #ffd23f;
+            --dark: #1a1a2e;
+            --light: #f7f7f2;
+            --manga-bg: #f5f5dc;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--dark);
+            color: var(--dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,107,53,0.1) 10px,
+                rgba(255,107,53,0.1) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(4rem, 15vw, 10rem);
+            color: var(--accent);
+            text-shadow: 
+                4px 4px 0px var(--primary),
+                8px 8px 0px var(--secondary),
+                12px 12px 20px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            animation: float 3s ease-in-out infinite;
+            line-height: 1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .subtitle {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
+        .prophecy {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--primary);
+            font-style: italic;
+            color: var(--light);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            backdrop-filter: blur(10px);
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            color: var(--light);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26,26,46,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+        }
+        
+        .nav.visible {
+            transform: translateY(0);
+        }
+        
+        .nav-logo {
+            font-family: 'Bangers', cursive;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Chapter Styles */
+        .chapter {
+            min-height: 100vh;
+            background: var(--manga-bg);
+            position: relative;
+            padding: 4rem 2rem;
+            border-bottom: 10px solid var(--dark);
+        }
+        
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .chapter-number {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+            letter-spacing: 0.3em;
+        }
+        
+        .chapter-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--dark);
+            text-transform: uppercase;
+            margin: 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .chapter-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        /* Manga Page Layout */
+        .manga-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            box-shadow: 
+                0 0 0 1px #ddd,
+                0 0 0 10px white,
+                0 0 0 11px #ddd,
+                0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .manga-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--dark) 0px,
+                var(--dark) 20px,
+                transparent 20px,
+                transparent 40px
+            );
+        }
+        
+        /* Panel Styles */
+        .panel {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .narration {
+            background: var(--dark);
+            color: var(--light);
+            padding: 1.5rem;
+            font-style: italic;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .narration::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: var(--primary);
+            opacity: 0.5;
+            font-family: serif;
+        }
+        
+        .scene {
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            border: 3px solid var(--dark);
+            border-radius: 5px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scene::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.03) 2px,
+                    rgba(0,0,0,0.03) 4px
+                );
+            pointer-events: none;
+        }
+        
+        .action {
+            text-transform: uppercase;
+            font-weight: 900;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .dialogue {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid var(--dark);
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+        
+        .dialogue::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--dark);
+        }
+        
+        .character {
+            font-weight: 900;
+            color: var(--primary);
+            min-width: 100px;
+            font-size: 1.1rem;
+        }
+        
+        .speech {
+            flex: 1;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        .sound-effect {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 0 var(--dark);
+            letter-spacing: 0.1em;
+            transform: rotate(-2deg);
+        }
+        
+        .fight-scene {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fight-scene::before {
+            content: 'FIGHT!';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: rgba(255,107,53,0.2);
+            transform: rotate(-15deg);
+        }
+        
+        .fight-scene .action {
+            color: var(--accent);
+        }
+        
+        .fight-scene .dialogue {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .fight-scene .dialogue::before {
+            border-top-color: var(--accent);
+        }
+        
+        .fight-scene .character {
+            color: var(--accent);
+        }
+        
+        .end-fight {
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 2rem 0;
+            letter-spacing: 0.2em;
+            position: relative;
+        }
+        
+        .end-fight::before,
+        .end-fight::after {
+            content: '◆';
+            margin: 0 1rem;
+            color: var(--primary);
+        }
+        
+        /* Character Cards */
+        .character-intro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .char-card {
+            background: white;
+            border: 3px solid var(--dark);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0 var(--dark);
+            transition: transform 0.3s;
+        }
+        
+        .char-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 10px 10px 0 var(--dark);
+        }
+        
+        .char-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: 900;
+        }
+        
+        .char-name {
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .char-power {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        /* Visual Elements */
+        .speed-line {
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--dark) 0px,
+                var(--dark) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .impact {
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 0 var(--dark);
+            margin: 2rem 0;
+            border-radius: 50%;
+            animation: pulse 1s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .manga-page {
+                padding: 1.5rem;
+            }
+            
+            .dialogue {
+                flex-direction: column;
+            }
+            
+            .character {
+                min-width: auto;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-text {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: var(--accent);
+            animation: loading 1s ease-in-out infinite;
+        }
+        
+        @keyframes loading {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Page Turn Effect */
+        .page-turn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-turn:hover {
+            background: linear-gradient(135deg, transparent 50%, var(--primary) 50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">LOADING MANGA...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">THE 5 BROTHERS</div>
+        <ul class="nav-links">
+            <li><a href="#ch1">Ch.1</a></li>
+            <li><a href="#ch2">Ch.2</a></li>
+            <li><a href="#ch3">Ch.3</a></li>
+            <li><a href="#ch4">Ch.4</a></li>
+            <li><a href="#ch5">Ch.5</a></li>
+            <li><a href="#ch6">Ch.6</a></li>
+            <li><a href="#ch7">Ch.7</a></li>
+            <li><a href="#ch8">Ch.8</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>THE 5 BROTHERS</h1>
+            <p class="subtitle">A Legend Begins</p>
+            <div class="prophecy">
+                There once was an ancient prophecy that 5 brothers would be given the power of Gods which would change the world...
+            </div>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Chapter 1 -->
+    <section class="chapter" id="ch1">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 1</div>
+            <h2 class="chapter-title">The 5 Brothers</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="narration">
+                    There once was an ancient prophecy that 5 brothers would be given the power of Gods in which would change the world.
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Roshan wakes up suddenly</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Where am I?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">???</span>
+                        <span class="speech" style="color: #666; font-style: italic;">"You don't belong here..."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="sound-effect">BEEP BEEP BEEP!</div>
+                <div class="scene">
+                    <span class="action">Roshan wakes up sweating and scared</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Yo Dishant, wake Suman up!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Okay!" *points finger gun at Suman's head, powers up rock ready to shoot*</span>
+                    </div>
+                    <div class="impact">BOOM!</div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Aww sh*t! Who the flip hit me?!" *mad*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Sweet headshot!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Everyone gets ready for the day</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Guys! We need to get ready fast!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Yeah. It's the first day of training!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I'll make breakfast then!" *goes to kitchen*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Arpan and Roshan talk</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Arpan, I gotta tell you something... I had a weird dream."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"About what?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"The thing is I can't remember the dream. I just know it wasn't good..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"It must've been a fuss then. Just don't worry about it."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"HEY! EVERYONE COME EAT!!!"</span>
+                    </div>
+                    <span class="action">Everyone eats breakfast and heads out</span>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"ALL RIGHT! LET'S GO THEN!!!"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section class="chapter" id="ch2">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 2</div>
+            <h2 class="chapter-title">Entrance to the Academy</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Outside the Academy</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"SO! THIS MUST BE IT!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Yep! Now we can finally be heroes!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">The door opens slowly... Jevan appears</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"So you guys must be the new kids."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Y-yeah... we... are..." *in shock*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Inside the Academy - The Power System</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"What are those dots on your hand?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"This is how heroes show how powerful they are. One dot = City Level, Two dots = Continental, Three dots = Planet Level, Four dots = Universal!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I see... I will be a Sensei one day, and become the strongest one!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">The Senseis appear</span>
+                    <div class="character-intro">
+                        <div class="char-card">
+                            <div class="char-icon">S</div>
+                            <div class="char-name">Spandan</div>
+                            <div class="char-power">Lightning Master</div>
+                        </div>
+                        <div class="char-card">
+                            <div class="char-icon">D</div>
+                            <div class="char-name">Darshan</div>
+                            <div class="char-power">Shadow Master</div>
+                        </div>
+                        <div class="char-card">
+                            <div class="char-icon">A</div>
+                            <div class="char-name">Alex</div>
+                            <div class="char-power">Water Master</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">Training Match: Symana vs Susannah</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Symana uses her swords and slashes Susannah!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Action</span>
+                        <span class="speech">Susannah gets hit but suddenly turns into a bunch of cherry blossoms!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Symana</span>
+                        <span class="speech">"That was clean, Susannah."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Susannah uses her blossoms to move in the air and throws sharp staff arrows!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Symana crosses her dual swords and mercury in the shape of an X dashes to Susannah!</span>
+                    </div>
+                    <div class="end-fight">END OF FIGHT</div>
+                    <div class="dialogue">
+                        <span class="character">Symana</span>
+                        <span class="speech">"We will try again some other day. You will succeed one day."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 3 -->
+    <section class="chapter" id="ch3">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 3</div>
+            <h2 class="chapter-title">Senseis and Students</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Spandan and Roshan - Lightning Training</span>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"Tell me what your power is."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"My power is lightning, sir!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"Perfect! I'm gonna kick an orb, shoot a lightning bolt at it!"</span>
+                    </div>
+                    <div class="impact">WHACK!</div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan couldn't react and gets hit in the face! Bloody nose!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Darshan and Dishant - Earth Training</span>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Take this cup of water. Try not to spill it while avoiding shadow attacks!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Fine by me! Let's start already!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">A small goblin comes from the shadow and attacks!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Why was that goblin so fast?! It came outta nowhere!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"That was my weakest goblin... There are many more like that in places you don't know of."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Jevan, Arpan and Prayash - Reflex Test</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"This room will push walls towards you at random. Dodge them!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">*uses wind to move Arpan out of the way but gets hit himself*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"If I can't protect Arpan, then I can't protect any innocent people. I have to try harder!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Alex and Suman - Fire vs Water</span>
+                    <div class="dialogue">
+                        <span class="character">Alex</span>
+                        <span class="speech">"I'll blast water at you. Refine your fire to extreme heat so the water evaporates!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"But sir, I can't even control my fire yet!"</span>
+                    </div>
+                    <div class="sound-effect">WHOOSH!</div>
+                    <div class="dialogue">
+                        <span class="character">Alex</span>
+                        <span class="speech">"Always be prepared. That's what my sensei said before the Abyss War."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"What is the Abyss War?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Alex</span>
+                        <span class="speech">"It is... You'll find out soon. THINK FAST!" *sprays water*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="background: #2a0a0a; color: white; border-color: #ff3333;">
+                    <span class="action" style="color: #ff6666;">Meanwhile... In an abandoned city</span>
+                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
+                        <span class="character" style="color: #ff6666;">Injured Man</span>
+                        <span class="speech">"I think I'm safe... These wounds are too deep..."</span>
+                    </div>
+                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
+                        <span class="character" style="color: #ff6666;">Metal Soldier</span>
+                        <span class="speech">"Boss, that's the last one."</span>
+                    </div>
+                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
+                        <span class="character" style="color: #ff0000; font-size: 1.3rem;">Rayce</span>
+                        <span class="speech">"One city down... One more city to go..." *evil smile*</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 4 -->
+    <section class="chapter" id="ch4">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 4</div>
+            <h2 class="chapter-title">More Students!?</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Roshan's Progress</span>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">*kicks orb*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">*zaps it perfectly* "I DID IT!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"That is only the first lesson... I put a mannequin over there. Think of what to do."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan uses lightning speed to grab the mannequin and appears at the far end of the room!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"Roshan, you have a lot of potential. Proud to have you as my student."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Dishant's Progress</span>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"You've succeeded with 50 goblins. Now let's step it up - 100 shadow goblins!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Come at me, goblins!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant hits weak points while weaving! One goblin breaks his glasses!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">*arm turns to rock and punches with tremendous force*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">*summons earth goblins and delivers the cup without spilling a drop*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Encounter with Aukash</span>
+                    <div class="dialogue">
+                        <span class="character">???</span>
+                        <span class="speech">"HEY! Who the hell are you?! Are you an infiltrator?!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">*blocks crystal drill with stone arms* "WOAH WOAH WOAH CALM DOWN! I'm a student!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Aukash</span>
+                        <span class="speech">"I'm Aukash, student of Brian Sensei. Oops, haha sorry about that. I just don't like infiltrators."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 5 -->
+    <section class="chapter" id="ch5">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 5</div>
+            <h2 class="chapter-title">Heated Lightning!</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Suman's Training Room</span>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Is it just me or is it getting hot?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"My lips are getting dry. Could this be Suman?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*charges huge fire* "Hey guys! That's something light compared to my real power!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">The Accident</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Wanna see what I learned?" *charges lightning but loses control*</span>
+                    </div>
+                    <div class="impact">ZAP!</div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*gets hit* "WHAT THE HELL?!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Sorry man! I didn't mean to! I thought I could control it better!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Doesn't change the fact that I'm hurt now!" *throws fireball*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">Fight Breaks Out!</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*runs up and punches stomach, then right hook*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">*catches hook, stuns with lightning, kicks away*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*uses fire on feet to push back, charges fire blast*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">*charges lightning blast*</span>
+                    </div>
+                    <div class="impact">CLASH!</div>
+                    <div class="dialogue">
+                        <span class="character">???</span>
+                        <span class="speech">*orb appears and sucks all elements* "That's enough."</span>
+                    </div>
+                    <div class="end-fight">END OF FIGHT</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">New Rules</span>
+                    <div class="dialogue">
+                        <span class="character">Rohan</span>
+                        <span class="speech">"Rule 1: No fighting inside. Rule 2: Fight outside the academy. Rule 3: NEVER BACK DOWN FROM A FIGHT!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Pscotty</span>
+                        <span class="speech">"Make it home safely, boys." *evil smirk*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I don't like Pscotty Sensei..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"I don't like you, but I also don't like Pscotty."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="background: linear-gradient(to bottom, #1a1a2e, #0f0f23); color: white;">
+                    <span class="action" style="color: #ffd23f;">Back Home</span>
+                    <div class="dialogue" style="background: rgba(255,255,255,0.1); border-color: #ffd23f; color: white;">
+                        <span class="character" style="color: #ffd23f;">Dishant</span>
+                        <span class="speech">"They fell asleep... Must've been a long day. Goodnight, brothers."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 6 -->
+    <section class="chapter" id="ch6">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 6</div>
+            <h2 class="chapter-title">Higher Ups</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="narration">
+                    2 months later, the brothers continued their training and grew stronger...
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="border-color: #ff0000; background: linear-gradient(to bottom, #fff, #ffe0e0);">
+                    <span class="action" style="color: #cc0000;">The Higher Ups Arrive</span>
+                    <div class="dialogue" style="border-color: #cc0000;">
+                        <span class="character" style="color: #cc0000;">Higher Up</span>
+                        <span class="speech">"In a few days you will fight in a tournament. Make no friends, nor enemies. Win and you'll be invited to a bigger, better, stronger academy."</span>
+                    </div>
+                    <div class="dialogue" style="border-color: #cc0000;">
+                        <span class="character" style="color: #cc0000;">Higher Up 2</span>
+                        <span class="speech">"We do not have powers like you. In fact, you could kill us right now if you wish."</span>
+                    </div>
+                    <div class="dialogue" style="border-color: #cc0000;">
+                        <span class="character" style="color: #cc0000;">Higher Up 3</span>
+                        <span class="speech">*gives evil smirk to the 5 brothers*</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Aftermath</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I sensed something awful about those people..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"I wanted to kill them judging by the way they were acting."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"They gave us a smirk... Are they the reason I had that dream?"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">Ambush!</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Metal goblin appears from street light pole and charges at Arpan!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">*uses lightning speed to grab Arpan*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Metal Goblin</span>
+                        <span class="speech">"You're the fastest, I can tell."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant & Prayash</span>
+                        <span class="speech">*giant boulder + wind force = SMASH!*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*punches with fire fists* "Rayce? Who is that, you ugly creature?!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Metal Goblin</span>
+                        <span class="speech">"You guys might be expected to rival the power of Rayce. I am out of here!"</span>
+                    </div>
+                    <div class="end-fight">END OF FIGHT</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="background: #0a0a1a; color: #aaa;">
+                    <span class="action" style="color: #666;">That Night</span>
+                    <div class="dialogue" style="background: rgba(255,255,255,0.05); border-color: #444; color: #aaa;">
+                        <span class="character" style="color: #888;">Roshan</span>
+                        <span class="speech">"Who are those Higher Ups? Who is this Rayce? Are they connected to the dream I had? I need answers..."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 7 -->
+    <section class="chapter" id="ch7">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 7</div>
+            <h2 class="chapter-title">First Mission</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">The Assignment</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Today you won't be training. Today is your first mission!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"First mission!?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"We've been getting reports on machines attacking civilians. This is a 1-dot mission."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"THIS IS GONNA BE A PIECE OF CAKE!!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">The Ride to the Abandoned City</span>
+                    <div class="dialogue">
+                        <span class="character">Driver (Roten)</span>
+                        <span class="speech">"You mean the one that just got destroyed? You really think they can handle all that?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Believe it or not, these guys are stronger than they look."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Hey Arpan, relax man. It's only a 1-dot mission."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I know, but you can never be too sure..."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="background: linear-gradient(to bottom, #2a2a3a, #1a1a2e); color: white;">
+                    <span class="action" style="color: #ff6b35;">Rayce's Throne Room</span>
+                    <div class="dialogue" style="background: rgba(0,0,0,0.3); border-color: #ff3333; color: white;">
+                        <span class="character" style="color: #ff3333;">Rayce</span>
+                        <span class="speech">*sensing something* "We have intruders... You! Go investigate who it is."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Investigating the City</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Isn't it weird how there's no metal inside the city? What if the villain is some kind of construction man!?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">*laughing*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"GUYS!! I think I found something! There's a huge machine running to... WAIT THAT'S US!!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">Battle in the Abandoned City</span>
+                    <div class="dialogue">
+                        <span class="character">Soldier</span>
+                        <span class="speech">"So you guys must be the intruders!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">*creates wind typhoon* "HAAAAH!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Soldier</span>
+                        <span class="speech">*appears from another piece of metal* "Come, brothers!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">*turns body into flames* "I said I would burn these things to ashes!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">*summons huge boulder* "Nice work Prayash, now it's my turn!"</span>
+                    </div>
+                    <div class="end-fight">END OF FIGHT</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene" style="background: #1a0a0a; color: #ffaaaa; border-color: #ff0000;">
+                    <span class="action" style="color: #ff0000;">The Aftermath</span>
+                    <div class="sound-effect" style="color: #ff4444;">RUMBLE...</div>
+                    <div class="dialogue" style="background: rgba(50,0,0,0.5); border-color: #ff0000; color: #ffcccc;">
+                        <span class="character" style="color: #ff6666;">Dishant</span>
+                        <span class="speech">"What is this power? It doesn't feel like a one-dot mission anymore..."</span>
+                    </div>
+                    <div class="dialogue" style="background: rgba(50,0,0,0.5); border-color: #ff0000; color: #ffcccc;">
+                        <span class="character" style="color: #ff6666;">Arpan</span>
+                        <span class="speech">"Can we all agree that didn't feel like a one-dot mission?"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 8 -->
+    <section class="chapter" id="ch8">
+        <div class="chapter-header">
+            <div class="chapter-number">CHAPTER 8</div>
+            <h2 class="chapter-title">Hands of Metal</h2>
+        </div>
+        
+        <div class="manga-page">
+            <div class="panel">
+                <div class="narration" style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: #ffd23f; border-left-color: #ff6b35;">
+                    To be continued... The true threat awakens.
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="scene" style="text-align: center; padding: 4rem; background: linear-gradient(135deg, #1a1a2e, #0f3460); color: white; border: 3px solid #ff6b35;">
+                    <h3 style="font-family: 'Bangers', cursive; font-size: 3rem; color: #ffd23f; margin-bottom: 1rem;">NEXT CHAPTER</h3>
+                    <p style="font-size: 1.5rem; color: #aaa;">The truth about Rayce revealed...</p>
+                    <div class="impact" style="margin: 2rem auto; width: 150px; height: 150px; font-size: 2rem;">TO BE CONTINUED</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hide loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navigation visibility
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for panels
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.panel').forEach(panel => {
+            observer.observe(panel);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Sound effect on click
+        document.querySelectorAll('.sound-effect').forEach(sound => {
+            sound.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
