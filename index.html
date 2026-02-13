@@ -153,6 +153,8 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         
         .nav-links a {
@@ -531,7 +533,8 @@
             }
             
             .nav-links {
-                display: none;
+                gap: 1rem;
+                font-size: 0.9rem;
             }
         }
         
@@ -567,20 +570,54 @@
             50% { opacity: 0.3; }
         }
         
-        /* Page Turn Effect */
-        .page-turn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.1) 50%);
-            cursor: pointer;
-            transition: all 0.3s;
+        /* Dark Scene */
+        .dark-scene {
+            background: linear-gradient(to bottom, #1a1a2e, #0f0f23) !important;
+            color: white !important;
+            border-color: #ff6b35 !important;
         }
         
-        .page-turn:hover {
-            background: linear-gradient(135deg, transparent 50%, var(--primary) 50%);
+        .dark-scene .action {
+            color: #ff6b35 !important;
+        }
+        
+        .dark-scene .dialogue {
+            background: rgba(255,255,255,0.1) !important;
+            border-color: #ff6b35 !important;
+            color: white !important;
+        }
+        
+        .dark-scene .dialogue::before {
+            border-top-color: #ff6b35 !important;
+        }
+        
+        .dark-scene .character {
+            color: #ff6b35 !important;
+        }
+        
+        /* Evil Scene */
+        .evil-scene {
+            background: linear-gradient(to bottom, #2a0a0a, #1a0505) !important;
+            color: #ffcccc !important;
+            border-color: #ff0000 !important;
+        }
+        
+        .evil-scene .action {
+            color: #ff0000 !important;
+        }
+        
+        .evil-scene .dialogue {
+            background: rgba(50,0,0,0.5) !important;
+            border-color: #ff0000 !important;
+            color: #ffcccc !important;
+        }
+        
+        .evil-scene .dialogue::before {
+            border-top-color: #ff0000 !important;
+        }
+        
+        .evil-scene .character {
+            color: #ff0000 !important;
         }
     </style>
 </head>
@@ -633,7 +670,7 @@
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Roshan wakes up suddenly</span>
+                    <span class="action">Roshan wakes up suddenly in a mysterious place</span>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
                         <span class="speech">"Where am I?"</span>
@@ -648,7 +685,7 @@
             <div class="panel">
                 <div class="sound-effect">BEEP BEEP BEEP!</div>
                 <div class="scene">
-                    <span class="action">Roshan wakes up sweating and scared</span>
+                    <span class="action">Alarm rings - Roshan wakes up sweating and scared</span>
                 </div>
             </div>
 
@@ -665,18 +702,26 @@
                     <div class="impact">BOOM!</div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
-                        <span class="speech">"Aww sh*t! Who the flip hit me?!" *mad*</span>
+                        <span class="speech">"Aww sh*t! Who the flip hit me?!" *mad saying*</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
                         <span class="speech">"Sweet headshot!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">*goes to turn off the alarm*</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Everyone gets ready for the day</span>
+                    <span class="action">Everyone gets up and prepares for the day</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">*goes to brush his teeth as Suman is in background*</span>
+                    </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
                         <span class="speech">"Guys! We need to get ready fast!"</span>
@@ -687,17 +732,29 @@
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">"I'll make breakfast then!" *goes to kitchen*</span>
+                        <span class="speech">"I'll make breakfast then!" *goes off to kitchen*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Okay!"</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Arpan and Roshan talk</span>
+                    <span class="action">Arpan and Roshan talk in private</span>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">"Arpan, I gotta tell you something... I had a weird dream."</span>
+                        <span class="speech">"Arpan, I gotta tell you something."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Sure."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I had a weird dream."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
@@ -720,11 +777,55 @@
                         <span class="character">Suman</span>
                         <span class="speech">"HEY! EVERYONE COME EAT!!!"</span>
                     </div>
-                    <span class="action">Everyone eats breakfast and heads out</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan & Roshan</span>
+                        <span class="speech">"OKAY! We'll be right there!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Alright, if you say so."</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Everyone goes to eat breakfast</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Today we have eggs and toasts!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"YO!! This is fire!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Thanks!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Hurry up and eat already. We got to get there in 15 minutes!"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Everyone finishes eating and prepares to leave</span>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">*done eating, go to put on shoes*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"We must get going now, we can't be late!"</span>
+                    </div>
                     <div class="dialogue">
                         <span class="character">Everyone</span>
                         <span class="speech">"ALL RIGHT! LET'S GO THEN!!!"</span>
                     </div>
+                    <span class="action">They all head out</span>
                 </div>
             </div>
         </div>
@@ -749,61 +850,158 @@
                         <span class="character">Dishant</span>
                         <span class="speech">"Yep! Now we can finally be heroes!"</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Who's going to open the door?"</span>
+                    </div>
+                    <span class="action">Everyone stares at each other</span>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"3, 2, 1, NOT IT!"</span>
+                    </div>
+                    <span class="action">Roshan is the last to say it</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Ughhh, fine..." *goes to open the door*</span>
+                    </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">The door opens slowly... Jevan appears</span>
+                    <span class="action">As Roshan is about to open the door, Jevan opens it from inside. The door opens slowly. Roshan jumps back in fear.</span>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
                         <span class="speech">"So you guys must be the new kids."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
-                        <span class="speech">"Y-yeah... we... are..." *in shock*</span>
+                        <span class="speech">"Y-yeah... we... are..." *in shock manner*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Come on in, I'll show y'all the place."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Okay!"</span>
+                    </div>
+                    <span class="action">They enter the academy</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Inside the Academy</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Woah! This place is HUGE!!!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"So why'd you guys enter the academy?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"We want to become heroes!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Heroes? It takes a lot to become one of those."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"We all know that and we been training since!"</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Inside the Academy - The Power System</span>
+                    <span class="action">The Power System Explained</span>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
                         <span class="speech">"What are those dots on your hand?"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
-                        <span class="speech">"This is how heroes show how powerful they are. One dot = City Level, Two dots = Continental, Three dots = Planet Level, Four dots = Universal!"</span>
+                        <span class="speech">"Oh this!" *shows hand* "This is how heroes show how powerful they are. One dot means the person is city level, two means you're continental, three means you're on planet level strength, four means you are universal!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
-                        <span class="speech">"I see... I will be a Sensei one day, and become the strongest one!"</span>
+                        <span class="speech">"I see, I will be a sensei one day, and become the strongest one."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Alright then! You guys can start the training whenever you like but first let's finish this tour."</span>
+                    </div>
+                    <span class="action">They continue to walk. Bunch of people in the background training including Spandan, Darshan, and Alex.</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Meeting the Senseis</span>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Who are those guys?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"These guys are one of our strongest sensei's."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Wait!? The strongest!?!"</span>
+                    </div>
+                    <span class="action">Spandan and Darshan walk to them</span>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"Hey guys!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Hello guys!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Alex</span>
+                        <span class="speech">"Hey guys!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Hello!"</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">The Senseis appear</span>
-                    <div class="character-intro">
-                        <div class="char-card">
-                            <div class="char-icon">S</div>
-                            <div class="char-name">Spandan</div>
-                            <div class="char-power">Lightning Master</div>
-                        </div>
-                        <div class="char-card">
-                            <div class="char-icon">D</div>
-                            <div class="char-name">Darshan</div>
-                            <div class="char-power">Shadow Master</div>
-                        </div>
-                        <div class="char-card">
-                            <div class="char-icon">A</div>
-                            <div class="char-name">Alex</div>
-                            <div class="char-power">Water Master</div>
-                        </div>
+                    <span class="action">Training Assignments</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"There's more sensei and student but they all out on mission currently."</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"So you guys are here for the exam?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Yes sir!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"But before the extreme training we will do an intro test first. This basically means you will show us what you're capable of doing."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Roshan, you're paired with Spandan. Dishant, you're paired with Darshan. Suman, you're paired with Alex. Prayash and Arpan, you're with me."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"ALRIGHT!"</span>
+                    </div>
+                    <span class="action">They all split up</span>
                 </div>
             </div>
 
@@ -824,17 +1022,26 @@
                     </div>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Susannah uses her blossoms to move in the air and throws sharp staff arrows!</span>
+                        <span class="speech">Susannah gets a petal and turns it into a sharp staff like arrows. She uses her blossoms to move in the air and throws many of those sharp staffs to Symana!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Symana crosses her dual swords and mercury in the shape of an X dashes to Susannah!</span>
+                        <span class="speech">Symana uses her dual swords and charges at the arrows to change the direction of them. She crosses her dual swords and mercury in the shape of an X dashes to Susannah!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Susannah moves out the way but the mercury follows her and she is forced to make a shield made of petals. She realizes she can't defend for much longer and then the mercury gets through the shield!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Susannah cannot react in time and then the attack suddenly stops!</span>
                     </div>
                     <div class="end-fight">END OF FIGHT</div>
                     <div class="dialogue">
                         <span class="character">Symana</span>
-                        <span class="speech">"We will try again some other day. You will succeed one day."</span>
+                        <span class="speech">*appears in front of Susannah* "We will try again some other day, you will succeed one day."</span>
                     </div>
+                    <span class="action">Cuts to Spandan and Roshan</span>
                 </div>
             </div>
         </div>
@@ -850,10 +1057,10 @@
         <div class="manga-page">
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Spandan and Roshan - Lightning Training</span>
+                    <span class="action">Spandan and Roshan are now in a room</span>
                     <div class="dialogue">
                         <span class="character">Spandan</span>
-                        <span class="speech">"Tell me what your power is."</span>
+                        <span class="speech">"Now then, tell me what your power is."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
@@ -861,101 +1068,227 @@
                     </div>
                     <div class="dialogue">
                         <span class="character">Spandan</span>
-                        <span class="speech">"Perfect! I'm gonna kick an orb, shoot a lightning bolt at it!"</span>
+                        <span class="speech">"Then I got a perfect test! First we're gonna test out how good you are with your power. I'm gonna kick an orb, shoot a lightning bolt at it."</span>
                     </div>
-                    <div class="impact">WHACK!</div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I'll try my best!"</span>
+                    </div>
+                    <span class="action">Spandan kicks his orb at Roshan</span>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Roshan couldn't react and gets hit in the face! Bloody nose!</span>
+                        <span class="speech">Roshan couldn't react to it and gets hit in the face! Roshan now has a bloody nose!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"I remember the first time I trained with my sensei, it was just like this."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Who was your sensei?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"He was a person just like principal Jevan, he was young, smart, and had a kind soul."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"What happened to him?"</span>
+                    </div>
+                    <span class="action">Spandan looks down with sadness on his face</span>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"Stand up Roshan, we still have training."</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Darshan and Dishant - Earth Training</span>
+                    <span class="action">Darshan and Dishant are in a dark room</span>
                     <div class="dialogue">
                         <span class="character">Darshan</span>
-                        <span class="speech">"Take this cup of water. Try not to spill it while avoiding shadow attacks!"</span>
+                        <span class="speech">"So you're telling me your power is earth?"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">"Fine by me! Let's start already!"</span>
+                        <span class="speech">"That's right, sir!"</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Okay then. Take this cup of water." *hands Dishant the water* "Try your best to not spill the water while avoiding these shadow attacks. If you do spill the water, you will have to retry."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Fine by me. Let's start already!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"If you say so."</span>
+                    </div>
+                    <span class="action">A small goblin comes from the shadow and attacks!</span>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">A small goblin comes from the shadow and attacks!</span>
+                        <span class="speech">The goblin lands a punch on Dishant! Dishant drops all the water and is now soaked!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">"Why was that goblin so fast?! It came outta nowhere!"</span>
+                        <span class="speech">"Why was that goblin so fast, it came outta nowhere!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Darshan</span>
-                        <span class="speech">"That was my weakest goblin... There are many more like that in places you don't know of."</span>
+                        <span class="speech">"That was my weakest goblin, there are many more like that in places you don't know of."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I will train hard enough to beat your strongest goblin!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Well come on then!"</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Jevan, Arpan and Prayash - Reflex Test</span>
+                    <span class="action">Jevan, Arpan and Prayash are in a high tech room</span>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
-                        <span class="speech">"This room will push walls towards you at random. Dodge them!"</span>
+                        <span class="speech">"Your first test will be a reflex test."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Prayash</span>
-                        <span class="speech">*uses wind to move Arpan out of the way but gets hit himself*</span>
+                        <span class="speech">"Meaning?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"This room is highly teched out which will push walls towards you at random so you guys will have to dodge these attacks."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Oh my god..."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Prayash</span>
-                        <span class="speech">"If I can't protect Arpan, then I can't protect any innocent people. I have to try harder!"</span>
+                        <span class="speech">*(this dude is so cooked)*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Y'all ready?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Yep!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Let's start then!"</span>
+                    </div>
+                    <span class="action">A wall from the left comes toward Arpan</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Prayash uses his wind to move Arpan out the way! Prayash gets hit in the process!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"If I can't protect Arpan then I can't protect any innocent people. I have to try harder!"</span>
+                    </div>
+                    <span class="action">Another wall comes to Arpan</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Crap!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Arpan gets pushed out the way!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Nice Prayash, you are really good!"</span>
+                    </div>
+                    <span class="action">Wall comes with mild speed</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Prayash moves it out the way with a simple push of wind!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Get ready, I'm using a quarter of this wall's speed."</span>
+                    </div>
+                    <div class="impact">BAM!!</div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Arpan and Prayash get hit!</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Alex and Suman - Fire vs Water</span>
+                    <span class="action">Cuts to Alex and Suman</span>
                     <div class="dialogue">
                         <span class="character">Alex</span>
-                        <span class="speech">"I'll blast water at you. Refine your fire to extreme heat so the water evaporates!"</span>
+                        <span class="speech">"So basically I will blast water toward you and I want you to refine your fire to an extreme heat so the water evaporates to contact."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
                         <span class="speech">"But sir, I can't even control my fire yet!"</span>
                     </div>
-                    <div class="sound-effect">WHOOSH!</div>
+                    <span class="action">Alex starts charging his water</span>
                     <div class="dialogue">
                         <span class="character">Alex</span>
-                        <span class="speech">"Always be prepared. That's what my sensei said before the Abyss War."</span>
+                        <span class="speech">"Ah who cares. 3, 2, 1!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
-                        <span class="speech">"What is the Abyss War?"</span>
+                        <span class="speech">"Wait wait WAIITTTT!!"</span>
+                    </div>
+                    <div class="sound-effect">WHOOSH!</div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman gets hit by the water!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Alex</span>
-                        <span class="speech">"It is... You'll find out soon. THINK FAST!" *sprays water*</span>
+                        <span class="speech">"Always be prepared. That's what my sensei said before the abyss war."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"What is the abyss war?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Alex</span>
+                        <span class="speech">"It is... You will find out soon. THINK FAST!" *sprays water in Suman's face*</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
-                <div class="scene" style="background: #2a0a0a; color: white; border-color: #ff3333;">
-                    <span class="action" style="color: #ff6666;">Meanwhile... In an abandoned city</span>
-                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
-                        <span class="character" style="color: #ff6666;">Injured Man</span>
-                        <span class="speech">"I think I'm safe... These wounds are too deep..."</span>
+                <div class="narration">
+                    The 5 brothers continue to train with their sensei but meanwhile...
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene evil-scene">
+                    <span class="action">In an abandoned city</span>
+                    <div class="dialogue">
+                        <span class="character">Injured Man</span>
+                        <span class="speech">"I think I'm safe..." *goes to hide in a building* "These wounds are too deep..." *huffing and puffing*</span>
                     </div>
-                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
-                        <span class="character" style="color: #ff6666;">Metal Soldier</span>
+                    <span class="action">A metal army soldier appears from behind</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Metal extends from army soldier and picks up the man and throws him!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Metal Soldier</span>
                         <span class="speech">"Boss, that's the last one."</span>
                     </div>
-                    <div class="dialogue" style="background: rgba(0,0,0,0.5); color: white; border-color: #ff3333;">
+                    <div class="dialogue">
                         <span class="character" style="color: #ff0000; font-size: 1.3rem;">Rayce</span>
-                        <span class="speech">"One city down... One more city to go..." *evil smile*</span>
+                        <span class="speech">"One city down, one more city to go..." *with an evil smile*</span>
                     </div>
                 </div>
             </div>
@@ -971,72 +1304,220 @@
         
         <div class="manga-page">
             <div class="panel">
+                <div class="narration">
+                    Goes back to the brothers and senseis...
+                </div>
+            </div>
+
+            <div class="panel">
                 <div class="scene">
-                    <span class="action">Roshan's Progress</span>
+                    <span class="action">Roshan's Training Progress</span>
                     <div class="dialogue">
-                        <span class="character">Spandan</span>
-                        <span class="speech">*kicks orb*</span>
+                        <span class="character">Narrator</span>
+                        <span class="speech">Spandan kicks an orb!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">*zaps it perfectly* "I DID IT!"</span>
+                        <span class="speech">*zaps it perfectly* "I DID IT!" *with scratches on him*</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Spandan</span>
-                        <span class="speech">"That is only the first lesson... I put a mannequin over there. Think of what to do."</span>
+                        <span class="speech">"That is only the first lesson Roshan, you have many more to go."</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I'm prepared for more, sensei!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Spandan</span>
+                        <span class="speech">"I put a mannequin over there, think of what to do."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Huh? What should I do?"</span>
+                    </div>
+                    <span class="action">Spandan kicks an orb at mannequin</span>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Roshan uses lightning speed to grab the mannequin and appears at the far end of the room!</span>
+                        <span class="speech">Roshan uses lightning speed to grab the mannequin and is now at the far end of the room!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Spandan</span>
-                        <span class="speech">"Roshan, you have a lot of potential. Proud to have you as my student."</span>
+                        <span class="speech">"Roshan, you have a lot of potential, proud to have you as my student."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Thanks sensei, I am proud to have you as my sensei."</span>
                     </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Dishant's Progress</span>
+                    <span class="action">Goes to Dishant and Darshan</span>
                     <div class="dialogue">
                         <span class="character">Darshan</span>
-                        <span class="speech">"You've succeeded with 50 goblins. Now let's step it up - 100 shadow goblins!"</span>
+                        <span class="speech">"You've succeeded with 50 goblins attacking you, now let's step it up!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">"Come at me, goblins!"</span>
+                        <span class="speech">"I'm ready, sensei!"</span>
+                    </div>
+                    <span class="action">Darshan tells 100 shadow goblins to go at Dishant</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Come at me goblins!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Dishant hits weak points while weaving! One goblin breaks his glasses!</span>
+                        <span class="speech">Dishant hits the goblins in their weak points while weaving them! One goblin hits Dishant breaking his glasses and then his arm turns into rock and punches the goblin with tremendous force!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant then summons his own earth goblins to fight for him as he proceeds to give the cup to Darshan without spilling a drop!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Well done, Dishant!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">*arm turns to rock and punches with tremendous force*</span>
+                        <span class="speech">"Thank you, sensei! My glasses broke from your goblin..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"I'll get Sensei Ritesh to ink you a new one."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">*summons earth goblins and delivers the cup without spilling a drop*</span>
+                        <span class="speech">"Thank you, sensei!"</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"You're welcome, be ready for more, that's all for today."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Thank you! I'll go check on the others then!"</span>
+                    </div>
+                    <span class="action">Dishant starts walking to Jevan's training room</span>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Encounter with Aukash</span>
+                    <span class="action">Unexpected Encounter</span>
                     <div class="dialogue">
                         <span class="character">???</span>
-                        <span class="speech">"HEY! Who the hell are you?! Are you an infiltrator?!"</span>
+                        <span class="speech">"HEY! Who the hell are you!"</span>
+                    </div>
+                    <span class="action">Dishant stops walking and slowly turns around</span>
+                    <div class="dialogue">
+                        <span class="character">???</span>
+                        <span class="speech">"Are you an infiltrator? If so I will kill you!" *charges a crystal drill and tries to hit Dishant*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant blocks it by crossing his arms and turns them into stone and quickly moves out the way!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">*blocks crystal drill with stone arms* "WOAH WOAH WOAH CALM DOWN! I'm a student!"</span>
+                        <span class="speech">"WOAH WOAH WOAH CALM DOWN! I'm a student!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">???</span>
+                        <span class="speech">"A student? Since when did we get new people?" *decharges the crystal drill*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I just started today and I should be the one asking you who the hell are you!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Aukash</span>
-                        <span class="speech">"I'm Aukash, student of Brian Sensei. Oops, haha sorry about that. I just don't like infiltrators."</span>
+                        <span class="speech">"I'm Aukash, I'm a student of Brian sensei."</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Who's Brian sensei?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Aukash</span>
+                        <span class="speech">"He's not here at the building right now. Why are you even wandering around?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I was going to Jevan's training room but then you just tried to attack me!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Aukash</span>
+                        <span class="speech">"Oops, haha sorry about that. I just don't like infiltrators but anyways I was going to Jevan's room too."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"We should go together then!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Aukash</span>
+                        <span class="speech">"Fine by me."</span>
+                    </div>
+                    <span class="action">They start walking together and arrive at the room</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">At Jevan's Training Room</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant goes to open the door. They see Prayash dodging the walls with ease!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Nice job Prayash! You can take a break for now."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Thank you, sensei!" *gets a bottle of water and walks towards Dishant*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Woah you were moving fast!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Ha, thanks!"</span>
+                    </div>
+                    <span class="action">Arpan is laying down on the floor tired</span>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"So who's this guy?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Aukash</span>
+                        <span class="speech">"My name's Aukash, I actually came here to talk to Jevan sensei."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Huh, me?"</span>
+                    </div>
+                    <span class="action">Aukash and Jevan start walking towards the side</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I wonder what they're talking about..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Who cares but anyways have you checked on Suman or Roshan?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I haven't, wanna go check up on them?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Yeah, let's go!"</span>
+                    </div>
+                    <span class="action">They walk out and leave the room</span>
                 </div>
             </div>
         </div>
@@ -1052,7 +1533,7 @@
         <div class="manga-page">
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Suman's Training Room</span>
+                    <span class="action">Prayash and Dishant walking towards Suman's room</span>
                     <div class="dialogue">
                         <span class="character">Prayash</span>
                         <span class="speech">"Is it just me or is it getting hot?"</span>
@@ -1062,58 +1543,136 @@
                         <span class="speech">"My lips are getting dry. Could this be Suman?"</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Suman</span>
-                        <span class="speech">*charges huge fire* "Hey guys! That's something light compared to my real power!"</span>
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Most likely, if so, he's getting strong!"</span>
                     </div>
+                    <span class="action">They arrive and open the door. They see Suman charging a huge fire!</span>
+                    <span class="action">Suman notices them and decharges the fire</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Hey guys!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Woah man that was insane!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Yeah it was getting hot from outside too!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"That's something light compared to my real power, you know. So where's Arpan and Roshan?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Arpan is pretty tired but we're gonna go to Roshan after we pick you up."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Let's go then!"</span>
+                    </div>
+                    <span class="action">All 3 of them start heading out</span>
                 </div>
             </div>
 
             <div class="panel">
-                <div class="fight-scene">
-                    <span class="action">The Accident</span>
+                <div class="scene">
+                    <span class="action">They see Roshan in the hall</span>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">"Wanna see what I learned?" *charges lightning but loses control*</span>
-                    </div>
-                    <div class="impact">ZAP!</div>
-                    <div class="dialogue">
-                        <span class="character">Suman</span>
-                        <span class="speech">*gets hit* "WHAT THE HELL?!"</span>
+                        <span class="speech">"What the heck are y'all doing here?"</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Roshan</span>
-                        <span class="speech">"Sorry man! I didn't mean to! I thought I could control it better!"</span>
-                    </div>
-                    <div class="dialogue">
-                        <span class="character">Suman</span>
-                        <span class="speech">"Doesn't change the fact that I'm hurt now!" *throws fireball*</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="fight-scene">
-                    <span class="action">Fight Breaks Out!</span>
-                    <div class="dialogue">
-                        <span class="character">Suman</span>
-                        <span class="speech">*runs up and punches stomach, then right hook*</span>
+                        <span class="character">Dishant</span>
+                        <span class="speech">"We went to go find you but I guess you're already here."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">*catches hook, stuns with lightning, kicks away*</span>
+                        <span class="speech">"Ohhh wanna see what I learned?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Okay!"</span>
+                    </div>
+                    <span class="action">Roshan charges his lightning but then he loses control!</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">The lightning hits Suman!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
-                        <span class="speech">*uses fire on feet to push back, charges fire blast*</span>
+                        <span class="speech">*looks up at Roshan with an angry face* "WHAT THE HELL?!"</span>
+                    </div>
+                    <span class="action">Suman charges his fire ready to attack Roshan</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Sorry man, I didn't mean to! I thought I could control it better!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Doesn't change the fact that I'm hurt now!"</span>
+                    </div>
+                    <span class="action">Suman throws a fireball at Roshan</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan dodges it!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">*charges lightning blast*</span>
+                        <span class="speech">"BRO I SAID I WAS SORRY!"</span>
                     </div>
-                    <div class="impact">CLASH!</div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Should we stop them?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Yeah, this can turn out bad for both of them!"</span>
+                    </div>
+                    <span class="action">They try to walk up to Roshan and Suman but then a man shows up</span>
                     <div class="dialogue">
                         <span class="character">???</span>
-                        <span class="speech">*orb appears and sucks all elements* "That's enough."</span>
+                        <span class="speech">"Shut up, and watch this."</span>
+                    </div>
+                    <span class="action">Prayash and Dishant are in shock and can't move</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="fight-scene">
+                    <span class="action">FIGHT!</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman runs up to Roshan and punches in the stomach then throws a right hook!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan catches his hook and places his hand to his chest and uses lightning to stun him!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman gets stunned then Roshan kicks him away!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman flies back then uses fires on his feet to push himself to Roshan!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman charges fire as he flies toward Roshan then blasts fire!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan charges lightning then blasts it!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">A small orb appears before they clash! The orb sucks all the element!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Unknown 2</span>
+                        <span class="speech">"That's enough." *puts his hand to both of their faces and pushes them away*</span>
                     </div>
                     <div class="end-fight">END OF FIGHT</div>
                 </div>
@@ -1121,32 +1680,90 @@
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">New Rules</span>
+                    <span class="action">The Senseis Revealed</span>
                     <div class="dialogue">
-                        <span class="character">Rohan</span>
-                        <span class="speech">"Rule 1: No fighting inside. Rule 2: Fight outside the academy. Rule 3: NEVER BACK DOWN FROM A FIGHT!"</span>
+                        <span class="character">Unknown 2</span>
+                        <span class="speech">"Hey Pscotty why didn't you stop this?"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Pscotty</span>
-                        <span class="speech">"Make it home safely, boys." *evil smirk*</span>
+                        <span class="speech">"Oops, sorry about that Rohan." *with a smirk on face*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan/Suman</span>
+                        <span class="speech">"HEY! WHO THE HELL ARE YOU GUYS!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Pscotty</span>
+                        <span class="speech">"We're senseis here, well technically Rohan just got promoted to Vice principal."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Rohan</span>
+                        <span class="speech">"It's not official yet but anyways, if you guys already didn't know the rules here, I will explain it. Rule number one, there is no fighting inside the building. Rule number two, if you wish to fight you must do it outside of the academy. And lastly rule number three, NEVER BACK DOWN FROM A FIGHT!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Rohan</span>
+                        <span class="speech">"Now then, I'll be heading out."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Pscotty</span>
+                        <span class="speech">"I will be heading out too, make it home safely boys." *evil smirk*</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">"I don't like Pscotty Sensei..."</span>
+                        <span class="speech">"I don't like Pscotty sensei..."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
                         <span class="speech">"I don't like you, but I also don't like Pscotty."</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Let's go home, don't let it get to you."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"I agree, I'll carry Arpan, he's very tired."</span>
+                    </div>
+                    <span class="action">Everyone goes home</span>
                 </div>
             </div>
 
             <div class="panel">
-                <div class="scene" style="background: linear-gradient(to bottom, #1a1a2e, #0f0f23); color: white;">
-                    <span class="action" style="color: #ffd23f;">Back Home</span>
-                    <div class="dialogue" style="background: rgba(255,255,255,0.1); border-color: #ffd23f; color: white;">
-                        <span class="character" style="color: #ffd23f;">Dishant</span>
-                        <span class="speech">"They fell asleep... Must've been a long day. Goodnight, brothers."</span>
+                <div class="scene dark-scene">
+                    <span class="action">Back Home</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I will be making dinner now."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"What are you making?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I am making fried chicken with a side of fries as a reward for our first day at the academy."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"YES! I am so excited!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I can't wait Dishant!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Do you need any help Dishant?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"No I don't, go get some rest guys."</span>
+                    </div>
+                    <span class="action">Dishant is done making the food and walks in the room</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"They fell asleep, must've been a long day, I guess we will have to eat tomorrow, goodnight brothers."</span>
                     </div>
                 </div>
             </div>
@@ -1163,42 +1780,167 @@
         <div class="manga-page">
             <div class="panel">
                 <div class="narration">
-                    2 months later, the brothers continued their training and grew stronger...
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="scene" style="border-color: #ff0000; background: linear-gradient(to bottom, #fff, #ffe0e0);">
-                    <span class="action" style="color: #cc0000;">The Higher Ups Arrive</span>
-                    <div class="dialogue" style="border-color: #cc0000;">
-                        <span class="character" style="color: #cc0000;">Higher Up</span>
-                        <span class="speech">"In a few days you will fight in a tournament. Make no friends, nor enemies. Win and you'll be invited to a bigger, better, stronger academy."</span>
-                    </div>
-                    <div class="dialogue" style="border-color: #cc0000;">
-                        <span class="character" style="color: #cc0000;">Higher Up 2</span>
-                        <span class="speech">"We do not have powers like you. In fact, you could kill us right now if you wish."</span>
-                    </div>
-                    <div class="dialogue" style="border-color: #cc0000;">
-                        <span class="character" style="color: #cc0000;">Higher Up 3</span>
-                        <span class="speech">*gives evil smirk to the 5 brothers*</span>
-                    </div>
+                    2 months later, the brothers continued their training and grew and grew stronger...
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Aftermath</span>
+                    <span class="action">Dishant's Training Room</span>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">"I sensed something awful about those people..."</span>
+                        <span class="speech">*screams* "HAAAAH!"</span>
+                    </div>
+                    <span class="action">As he charges to a huge goblin!</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant summons a huge rock and smashes it on the goblin's head! The goblin fades away!</span>
                     </div>
                     <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant takes a huge breath!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"That's the last one Dishant, you have grown quite a lot!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Thank you Sensei!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Now as a reward, here. I asked Ritesh to make you special glasses."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"WOW! I love them, they feel nice and I have even better vision now!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Darshan</span>
+                        <span class="speech">"Don't thank me, thank Ritesh, now go, everyone is waiting for you in the main lobby."</span>
+                    </div>
+                    <span class="action">Dishant goes to the main lobby</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene evil-scene">
+                    <span class="action">The Higher Ups Arrive</span>
+                    <div class="dialogue">
                         <span class="character">Prayash</span>
-                        <span class="speech">"I wanted to kill them judging by the way they were acting."</span>
+                        <span class="speech">"Sit down, quick Dishant!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up</span>
+                        <span class="speech">"We have come here to send a message."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up 2</span>
+                        <span class="speech">"In a few days you guys will be fighting in a tournament amongst yourselves."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up 3</span>
+                        <span class="speech">"Make no friends, nor enemies. If you win you will be invited to a bigger, better, stronger academy."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up</span>
+                        <span class="speech">"If you have any questions, you may ask."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">"They gave us a smirk... Are they the reason I had that dream?"</span>
+                        <span class="speech">"Who are you people?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up</span>
+                        <span class="speech">"We are the people who manage everything that goes on here, you name it, we created it."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up 2</span>
+                        <span class="speech">"We do not have powers like you people."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up 3</span>
+                        <span class="speech">"In fact, you people can kill us right now if you wish."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up</span>
+                        <span class="speech">"But your senseis are in charge of keeping us alive. Isn't that right Jevan?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Yes students, they are correct." *looking down in shame*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Higher Up</span>
+                        <span class="speech">"Now then Ritesh, make us an airplane so we can go back to the HQ."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Ritesh</span>
+                        <span class="speech">"Right away sir."</span>
+                    </div>
+                    <span class="action">They get on and give the 5 brothers an evil smirk before leaving</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Everyone go home, sensei's stay."</span>
+                    </div>
+                    <span class="action">Everyone goes home</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Sensei Meeting</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Sensei's, as you all now know what is going on in a few days, please train your students as hard as you physically can. We cannot make these students look bad in front of the higher ups."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Rohan</span>
+                        <span class="speech">"Six kids were in the academy fighting today, I stopped it while someone was just watching." *looks at Pscotty*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Pscotty</span>
+                        <span class="speech">"I didn't want to interfere, it was entertaining."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Enough out of you two. I am going to announce the next principal after my time is over. The new Vice Principal is Rohan Lama."</span>
+                    </div>
+                    <span class="action">Everyone cheering and clapping for Rohan</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Cuts to brothers on the way home</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"I sensed something awful about those people."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"My theory is, they are extremely powerful, not in terms of strength but by their demeanor."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"I wanted to kill them judging the way they were acting."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"When they said we could kill them if we wanted to, I would've if those damn senseis weren't there."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"They gave us a smirk. For what reason? Are they the reason I had that dream?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone but Arpan</span>
+                        <span class="speech">"Dream? What dream?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"It's a long story."</span>
                     </div>
                 </div>
             </div>
@@ -1206,28 +1948,59 @@
             <div class="panel">
                 <div class="fight-scene">
                     <span class="action">Ambush!</span>
+                    <span class="action">Metal goblin appears from street light pole and charges at Arpan!</span>
                     <div class="dialogue">
                         <span class="character">Narrator</span>
-                        <span class="speech">Metal goblin appears from street light pole and charges at Arpan!</span>
-                    </div>
-                    <div class="dialogue">
-                        <span class="character">Roshan</span>
-                        <span class="speech">*uses lightning speed to grab Arpan*</span>
+                        <span class="speech">Roshan uses lightning speed to grab Arpan!</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Metal Goblin</span>
                         <span class="speech">"You're the fastest, I can tell."</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Dishant & Prayash</span>
-                        <span class="speech">*giant boulder + wind force = SMASH!*</span>
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant summons a giant boulder while Prayash pushes it with tremendous wind force!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Boulder smashes the ground with no trace of goblin!</span>
+                    </div>
+                    <span class="action">Metal goblin appears in front of Suman</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman punches the goblin with fire fists!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Goblin</span>
+                        <span class="speech">"Rayce said this would be easier."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
-                        <span class="speech">*punches with fire fists* "Rayce? Who is that, you ugly creature?!"</span>
+                        <span class="speech">"Rayce? Who is that you ugly creature!"</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Metal Goblin</span>
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Use this drone to push out water, Roshan you have to use your lightning to kill this monster."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"You're right, water and lightning will defeat this monster."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Go now Roshan!"</span>
+                    </div>
+                    <span class="action">Roshan appears behind goblin</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Goblin tries to spin and hit but Roshan is in the air! Water sprays from drone!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan zaps the metal goblin but the goblin combines with street pole!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Goblin</span>
                         <span class="speech">"You guys might be expected to rival the power of Rayce. I am out of here!"</span>
                     </div>
                     <div class="end-fight">END OF FIGHT</div>
@@ -1235,11 +2008,38 @@
             </div>
 
             <div class="panel">
-                <div class="scene" style="background: #0a0a1a; color: #aaa;">
-                    <span class="action" style="color: #666;">That Night</span>
-                    <div class="dialogue" style="background: rgba(255,255,255,0.05); border-color: #444; color: #aaa;">
-                        <span class="character" style="color: #888;">Roshan</span>
-                        <span class="speech">"Who are those Higher Ups? Who is this Rayce? Are they connected to the dream I had? I need answers..."</span>
+                <div class="scene">
+                    <span class="action">Aftermath</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Who is this Rayce?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I'm expecting him to be his leader. Looking at that goblin, there are many more exactly like him, maybe stronger."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Whoever it is, we have to get stronger to defeat someone like that in just one strike."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Dishant is right."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"I agree, next time I will burn him into ashes."</span>
+                    </div>
+                    <span class="action">They all go home</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene dark-scene">
+                    <span class="action">Roshan in bed</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Who are those higher ups? Who is this Rayce? Are they connected to the dream I had? I need answers..."</span>
                     </div>
                 </div>
             </div>
@@ -1256,10 +2056,26 @@
         <div class="manga-page">
             <div class="panel">
                 <div class="scene">
-                    <span class="action">The Assignment</span>
+                    <span class="action">Alarm goes off</span>
+                    <div class="sound-effect">BEEP BEEP BEEP!</div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">*wakes up* "SHIT! We're gonna be late!"</span>
+                    </div>
+                    <span class="action">Everyone wakes up. They go put on clothes and walk out the house.</span>
+                    <span class="action">They arrive at the academy and scan their card to enter. They run to the halls.</span>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
-                        <span class="speech">"Today you won't be training. Today is your first mission!"</span>
+                        <span class="speech">"Hold it boys!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Everyone</span>
+                        <span class="speech">"Huh!?"</span>
+                    </div>
+                    <span class="action">They stop running</span>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Today you guys won't be doing training actually. Today you will be put on your first mission!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
@@ -1267,7 +2083,23 @@
                     </div>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
-                        <span class="speech">"We've been getting reports on machines attacking civilians. This is a 1-dot mission."</span>
+                        <span class="speech">"Yes that's right, We've been getting reports on some kind of a machine attacking civilians."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"WAIT! We got attacked too by some kind of machine yesterday out of nowhere!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">*(So that was the energy I felt the other day)* "Huh, that's strange because the latest reports were all on civilians."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"So when do we start!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"In 1 hour, you will be transported to the site of where the mission should be held. This is only a ranked 1 dot mission so you should be able to pass."</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Suman</span>
@@ -1278,93 +2110,431 @@
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">The Ride to the Abandoned City</span>
+                    <span class="action">1 Hour goes by - Everyone is at the entrance</span>
                     <div class="dialogue">
-                        <span class="character">Driver (Roten)</span>
+                        <span class="character">Driver</span>
+                        <span class="speech">"Ahhhh how much driving do I gotta do this time..." *stretches his arm*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Jevan</span>
+                        <span class="speech">"Now now you just have to drop these guys to the abandoned city."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
                         <span class="speech">"You mean the one that just got destroyed? You really think they can handle all that?"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Jevan</span>
-                        <span class="speech">"Believe it or not, these guys are stronger than they look."</span>
+                        <span class="speech">"Believe it or not these guys are stronger than they look."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"If you say so."</span>
+                    </div>
+                    <span class="action">Driver walks out and opens the car and sits down</span>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"HEY! Why y'all just standing there and get in!"</span>
+                    </div>
+                    <span class="action">All brothers but Prayash go to the door but gets jammed</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"GET OUT!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Roshan</span>
-                        <span class="speech">"Hey Arpan, relax man. It's only a 1-dot mission."</span>
+                        <span class="speech">"WELL I WAS HERE FIRST!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"BUT I'M THE OLDEST!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
-                        <span class="speech">"I know, but you can never be too sure..."</span>
+                        <span class="speech">"MY FEET WAS HERE FIRST!"</span>
                     </div>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="scene" style="background: linear-gradient(to bottom, #2a2a3a, #1a1a2e); color: white;">
-                    <span class="action" style="color: #ff6b35;">Rayce's Throne Room</span>
-                    <div class="dialogue" style="background: rgba(0,0,0,0.3); border-color: #ff3333; color: white;">
-                        <span class="character" style="color: #ff3333;">Rayce</span>
-                        <span class="speech">*sensing something* "We have intruders... You! Go investigate who it is."</span>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"You guys know there's another door?"</span>
                     </div>
+                    <div class="dialogue">
+                        <span class="character">Brothers</span>
+                        <span class="speech">"Oh..."</span>
+                    </div>
+                    <span class="action">Cuts to them being all in car and driving to the site</span>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="scene">
-                    <span class="action">Investigating the City</span>
+                    <span class="action">In the Car</span>
                     <div class="dialogue">
-                        <span class="character">Roshan</span>
-                        <span class="speech">"Isn't it weird how there's no metal inside the city? What if the villain is some kind of construction man!?"</span>
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman is sleeping. Prayash is looking at window. Dishant is throwing a rock and catching it. Arpan is looking at window stressing.</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Everyone</span>
-                        <span class="speech">*laughing*</span>
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Hey Arpan!"</span>
+                    </div>
+                    <span class="action">Arpan looks at him</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Huh?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Relax man I can tell you're stressing out, it's only a 1 dot mission!"</span>
+                    </div>
+                    <span class="action">Driver looks at glass to check the back seat</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I know but you can never be too sure, who knows what will happen..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"But we're all here too, we can all protect each other no matter how hard the mission is!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Arpan</span>
-                        <span class="speech">"GUYS!! I think I found something! There's a huge machine running to... WAIT THAT'S US!!"</span>
+                        <span class="speech">"Ha that's true, guess I'm just over thinking it."</span>
                     </div>
+                    <span class="action">They continue to drive. They arrive to entrance to the city but an officer stops the car.</span>
+                    <div class="dialogue">
+                        <span class="character">Officer</span>
+                        <span class="speech">"This place is restricted, no one is allowed to enter."</span>
+                    </div>
+                    <span class="action">Driver shows his card to the officer</span>
+                    <div class="dialogue">
+                        <span class="character">Officer</span>
+                        <span class="speech">"OH sorry about that, you're free to enter!"</span>
+                    </div>
+                    <span class="action">They drive off</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"How'd you just do that?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"It's our card, it can access almost anything that the world wants to keep hidden."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"ANYTHING!! Why didn't they tell us sooner?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"It's probably because they don't want us to abuse it."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"That's true, the main purpose of it is to do mission."</span>
+                    </div>
+                    <span class="action">Roshan takes his card out of his pocket and looks at it</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Wow that's really cool!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"But anyways we're here now."</span>
+                    </div>
+                    <span class="action">The brothers get out of the car. Shows the whole broken down city.</span>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"So I'll leave you guys to it then."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"By the way, what is your name?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Driver</span>
+                        <span class="speech">"My name is Roten. Just call the academy when you're done."</span>
+                    </div>
+                    <span class="action">Roten drives off</span>
+                    <div class="dialogue">
+                        <span class="character">Brothers</span>
+                        <span class="speech">"BYE!!!!!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Huh so now what?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Guess we just explore until we find something."</span>
+                    </div>
+                    <span class="action">They start walking to the city</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene evil-scene">
+                    <span class="action">Cuts to Rayce sitting on his throne with metal soldiers in the background</span>
+                    <span class="action">Rayce senses something</span>
+                    <div class="dialogue">
+                        <span class="character">Rayce</span>
+                        <span class="speech">"We have intruders... You!" *points to a soldier* "Go investigate who it is."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Soldier</span>
+                        <span class="speech">"Right away sir!"</span>
+                    </div>
+                    <span class="action">Soldier goes away</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="scene">
+                    <span class="action">Cuts back to the brothers walking around the city</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"This is getting boring, where's all the bad guys?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Calm down we just got here."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I'll use my drone to scan the place around."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Alright but be careful, your drones are valuable."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"I know that."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"HEY GUYS!"</span>
+                    </div>
+                    <span class="action">Brothers turn around</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I noticed something!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"What?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Isn't it weird how there's no metal inside the city?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Wait you're right!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"What if the villain is some kind of construction man!?"</span>
+                    </div>
+                    <span class="action">They all look at him and start laughing</span>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"What's so funny, I'm being serious!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"GUYS!! I THINK I FOUND SOMETHING!"</span>
+                    </div>
+                    <span class="action">They all run to Arpan</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Look here!"</span>
+                    </div>
+                    <span class="action">They look at the laptop</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"There's a huge machine running to something..."</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"WAIT THAT SOMETHING IS US!!"</span>
+                    </div>
+                    <span class="action">They all jump up and ready to fight. Wind starts to blow and becomes quiet.</span>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="fight-scene">
-                    <span class="action">Battle in the Abandoned City</span>
+                    <span class="action">FIGHT!</span>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">The soldier starts slowly walking towards them!</span>
+                    </div>
                     <div class="dialogue">
                         <span class="character">Soldier</span>
                         <span class="speech">"So you guys must be the intruders!"</span>
                     </div>
                     <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Prayash lunges forward and tries to punch the goblin!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Soldier moves out the way and tries to hit Prayash!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan uses his lightning speed and stops the punch and grabs Prayash!</span>
+                    </div>
+                    <div class="dialogue">
                         <span class="character">Prayash</span>
-                        <span class="speech">*creates wind typhoon* "HAAAAH!"</span>
+                        <span class="speech">"Thanks Roshan!"</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Soldier</span>
-                        <span class="speech">*appears from another piece of metal* "Come, brothers!"</span>
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Yeah, no problem!"</span>
                     </div>
                     <div class="dialogue">
-                        <span class="character">Suman</span>
-                        <span class="speech">*turns body into flames* "I said I would burn these things to ashes!"</span>
+                        <span class="character">Narrator</span>
+                        <span class="speech">Prayash takes a huge deep breath and rushes to the soldier and creates a wind typhoon by pushing his arms forward!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Prayash is so strong now!"</span>
                     </div>
                     <div class="dialogue">
                         <span class="character">Dishant</span>
-                        <span class="speech">*summons huge boulder* "Nice work Prayash, now it's my turn!"</span>
+                        <span class="speech">"Jevan has taught him well!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Soldier gets caught in the typhoon but he then appears from another piece of metal on the ground!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Soldier</span>
+                        <span class="speech">"Come brothers!"</span>
+                    </div>
+                    <span class="action">More soldiers appear from pieces of metal</span>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"ROSHAN LOOK OUT!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Roshan jumps up and creates a lightning bolt that zaps the soldier but it suddenly bounces off the soldier!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"I forgot I can't hit these things perfectly!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Roshan, protect Arpan. I'll take care of these things as well!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"I said I would burn these things to ashes, now I will!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman lunges in and fires his fists and defeats the soldier in one strike!</span>
+                    </div>
+                    <span class="action">More appear</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"COME AT ME!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant then turns his hands into stone and punches the ground to make the goblins get off balance!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman also gets off balanced and is now getting grabbed by the soldier!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman then turns his body into flames and all the goblins turn into ashes!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant runs at full speed and looks into the corner of his eye seeing Prayash beating up two at the same time!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Nice work Prayash, now it's my turn!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant summons a huge boulder and hits three soldiers running at him and then punches the ground to make the other three soldiers off balanced and smashes his fists into them!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Dishant yells for Suman and Prayash!</span>
                     </div>
                     <div class="end-fight">END OF FIGHT</div>
                 </div>
             </div>
 
             <div class="panel">
-                <div class="scene" style="background: #1a0a0a; color: #ffaaaa; border-color: #ff0000;">
-                    <span class="action" style="color: #ff0000;">The Aftermath</span>
-                    <div class="sound-effect" style="color: #ff4444;">RUMBLE...</div>
-                    <div class="dialogue" style="background: rgba(50,0,0,0.5); border-color: #ff0000; color: #ffcccc;">
-                        <span class="character" style="color: #ff6666;">Dishant</span>
-                        <span class="speech">"What is this power? It doesn't feel like a one-dot mission anymore..."</span>
+                <div class="scene">
+                    <span class="action">Aftermath</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Do you guys see anymore?"</span>
                     </div>
-                    <div class="dialogue" style="background: rgba(50,0,0,0.5); border-color: #ff0000; color: #ffcccc;">
-                        <span class="character" style="color: #ff6666;">Arpan</span>
-                        <span class="speech">"Can we all agree that didn't feel like a one-dot mission?"</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"No, we don't!"</span>
                     </div>
+                    <span class="action">The ground shakes</span>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"What is this power, it doesn't feel like a one dot mission anymore!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Suman falls off balance!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Narrator</span>
+                        <span class="speech">Prayash uses his wind to keep him upright!</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"Thanks Prayash!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"No problem!"</span>
+                    </div>
+                    <span class="action">Ground stops shaking</span>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"Roshan, Arpan, you guys okay?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Roshan</span>
+                        <span class="speech">"Yeah we are okay!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"Damn that was a lot!" *brushes dust off him*</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Arpan</span>
+                        <span class="speech">"Can we all agree that didn't feel like one dot mission?"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Dishant</span>
+                        <span class="speech">"That's what I was feeling!"</span>
+                    </div>
+                    <div class="dialogue">
+                        <span class="character">Prayash</span>
+                        <span class="speech">"We should get some rest for now, we don't know how much more will come."</span>
+                    </div>
+                    <span class="action">They walk towards a building</span>
+                    <div class="dialogue">
+                        <span class="character">Suman</span>
+                        <span class="speech">"This building is good enough for tonight!"</span>
+                    </div>
+                    <span class="action">They all sit down on the ground and start resting</span>
                 </div>
             </div>
         </div>
@@ -1380,7 +2550,7 @@
         <div class="manga-page">
             <div class="panel">
                 <div class="narration" style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: #ffd23f; border-left-color: #ff6b35;">
-                    To be continued... The true threat awakens.
+                    To be continued... The true threat awakens. The Hands of Metal reach out for the 5 Brothers!
                 </div>
             </div>
             
@@ -1388,6 +2558,7 @@
                 <div class="scene" style="text-align: center; padding: 4rem; background: linear-gradient(135deg, #1a1a2e, #0f3460); color: white; border: 3px solid #ff6b35;">
                     <h3 style="font-family: 'Bangers', cursive; font-size: 3rem; color: #ffd23f; margin-bottom: 1rem;">NEXT CHAPTER</h3>
                     <p style="font-size: 1.5rem; color: #aaa;">The truth about Rayce revealed...</p>
+                    <p style="font-size: 1.2rem; color: #ff6b35; margin-top: 1rem;">The Abyss War approaches...</p>
                     <div class="impact" style="margin: 2rem auto; width: 150px; height: 150px; font-size: 2rem;">TO BE CONTINUED</div>
                 </div>
             </div>
